@@ -1,0 +1,14 @@
+{
+  "component": {
+    "type": "MFE-COMP",
+    "url": "http://localhost:3003/mfe-comp.js",
+    "attribs": {}
+  },
+  "remote-app": {
+    "type": "REMOTE-APP",
+    "url": "http://localhost:3003/remote-app.js",
+    "attribs": {
+      "url": "http://localhost:3002/"
+    }
+  }
+}

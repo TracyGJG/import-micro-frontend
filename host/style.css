@@ -1,0 +1,21 @@
+body {
+  overflow: hidden;
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 2em auto;
+  grid-template-areas:
+    'header header'
+    'left right';
+}
+
+header {
+  grid-area: header;
+}
+
+.left {
+  grid-area: left;
+}
+.right {
+  grid-area: right;
+}
