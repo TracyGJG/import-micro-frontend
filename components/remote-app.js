@@ -1,20 +1,23 @@
 const WebComponentStylesheet = () => {
   const StyleSheet = new CSSStyleSheet();
   StyleSheet.replaceSync(/*css*/ `
-  .error {
-  border: 2px solid #f00;
-  background-color: #f003;
-  text-align: center;
-  inset: 0;
-  position: absolute;
-}
+    .error {
+      border: 2px solid #f00;
+      background-color: #f003;
+      text-align: center;
+      inset: 0;
+      position: absolute;
+    }
+    iframe {
+      border: none 0;
+    }
   `);
   return StyleSheet;
 };
 
 const WebComponentTemplate = (srcUrl) => {
   const template = document.createElement('template');
-  template.innerHTML = `<iframe src="${srcUrl}" frameborder="0"></iframe>`;
+  template.innerHTML = `<iframe src="${srcUrl}"></iframe>`;
   return template.content.cloneNode(true);
 };
 

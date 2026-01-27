@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "json-server -no-cors -p 3001 -s ./host  db.json",
+    "start": "json-server -p 3001 -s ./host  db.json",
     "remote": "json-server -p 3002 -s ./remote  db.json",
-    "comp": "json-server -no-cors -p 3003 -s ./components  db.json"
+    "comp": "json-server -p 3003 -s ./components  db.json"
   },
   "keywords": [],
   "author": "",
