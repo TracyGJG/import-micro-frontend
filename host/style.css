@@ -3,7 +3,7 @@ body {
   height: calc(100vh - 1em);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2em auto;
+  grid-template-rows: 4em auto;
   gap: 1em;
   grid-template-areas:
     'header header'
@@ -21,4 +21,11 @@ header {
 .right {
   grid-area: right;
   position: relative;
+}
+.error {
+  border: 2px solid #f00;
+  background-color: #f003;
+  text-align: center;
+  inset: 0;
+  position: absolute;
 }

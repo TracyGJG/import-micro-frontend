@@ -1,4 +1,4 @@
-const WebComponentSytlesheet = () => {
+const WebComponentStylesheet = () => {
   const StyleSheet = new CSSStyleSheet();
   StyleSheet.replaceSync(/*css*/ `
   `);
@@ -32,7 +32,7 @@ class WebComponent extends HTMLElement {
     this.count = null;
 
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [WebComponentSytlesheet()];
+    this.shadowRoot.adoptedStyleSheets = [WebComponentStylesheet()];
 
     this.addEventListener('messageFromHost', (evt) => {
       if (this.count) {
