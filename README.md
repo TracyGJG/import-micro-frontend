@@ -24,7 +24,9 @@ Pretty much all MFE techniques require a manifest of some sort to map components
 
 We have a manifest file, in JSON format, that details the configuration of each MFE (component), where they are to be injected and where they are to be obtained.
 
-The host page loads and processes the manifest by loading each component dynamically (in the browser) and injects the component, with its sepecific configuration (attributes) into the document (DOM). In the case of the `remote-app` component, the configuration includes the URL where the remote application can be found. In the case when the remote server off-line or the application fails to load for another reason, an error panel will be shown in its place.
+`JSON-SERVER` is used to host 3 lots of static content on different ports. One for the host application (3001), another for the remote application (3002) and the last for the components (3003.)
+
+The host page loads and processes the manifest by loading each component dynamically (in the browser) and injects the component, with its sepecific configuration (attributes) into the document (DOM). In the case of the `remote-app` component, the configuration includes the URL where the remote application can be found. In the case when the remote server off-line or the application fails to load for another reason, an error panel will be shown in its place. 
 
 ## Inter-MFE communication
 
