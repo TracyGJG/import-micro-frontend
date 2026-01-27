@@ -5,74 +5,50 @@ const WebComponentSytlesheet = () => {
   return StyleSheet;
 };
 
-const WebComponentTemplate = (attrProp) => {
+const WebComponentTemplate = () => {
   const template = document.createElement('template');
   template.innerHTML = /*html*/ `
-    <div>MFE Component
-    </div>
+    <section>
+      <h2>MFE Component</h2>
+      <button action="incCount">Inc Count</button>
+      <div id="count"></div>
+    </section>
   `;
-  return template.content.cloneNode(true);
+  const newInstance = template.content.cloneNode(true);
+  newInstance.querySelector('[action]').addEventListener('click', incCount);
+  return newInstance;
+
+  function incCount() {
+    const evt = new CustomEvent('messageToHost', {
+      detail: 'From component (incCount)',
+    });
+    globalThis.dispatchEvent(evt);
+  }
 };
 
 class WebComponent extends HTMLElement {
-  static ObservedAttributes = ['prop'];
-
   constructor() {
     super();
+    this.count = null;
 
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.adoptedStyleSheets = [WebComponentSytlesheet()];
-    this.shadowRoot.appendChild(WebComponentTemplate(this.attrProp));
+
+    this.addEventListener('messageFromHost', (evt) => {
+      if (this.count) {
+        this.count.textContent = evt.detail;
+      }
+    });
   }
 
-  // get attrProp() {
-  //   return this.getAttribute("prop");
-  // }
-
-  // set attrProp(value) {
-  //   this.setAttribute("prop", value);
-  // }
-
-  // get eventProp() {
-  //   return this.#internalClickEvent;
-  // }
-
-  // set eventProp(fn) {
-  //   this.#internalClickEvent = fn;
-  // }
-
-  static get observedAttributes() {
-    return this.ObservedAttributes;
+  connectedCallback() {
+    this.shadowRoot.appendChild(WebComponentTemplate());
+    this.count = this.shadowRoot.querySelector('#count');
   }
 
-  // handleEvent(evt) {
-  //   const attrValues = ["Tick", "Tack", "Toe"];
-  //   if ("Toggle" === evt.target.textContent) {
-  //     this.attrProp =
-  //       attrValues[
-  //         (1 +
-  //           attrValues.findIndex((attrValue) => attrValue === this.attrProp)) %
-  //           attrValues.length
-  //       ];
-  //   }
-  // }
-
-  // attributeChangedCallback(name, oldVal, newVal) {
-  //   if (WebComponent.ObservedAttributes.includes(name)) {
-  //     if (name === "prop") {
-  //       this.#attr.textContent = newVal;
-  //     }
-  //   }
-  // }
-
-  // connectedCallback() {
-  //   this.#buttons[0].addEventListener("click", (evt) => {
-  //     alert(`Button One, ${!!this.#internalClickEvent}`);
-  //     this.#internalClickEvent && this.#internalClickEvent(evt);
-  //   });
-  // }
-
-  disconnectedCallback() {}
+  disconnectedCallback() {
+    this.count = null;
+  }
 }
 
 customElements.define('mfe-comp', WebComponent);

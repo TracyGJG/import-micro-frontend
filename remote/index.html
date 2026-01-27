@@ -3,11 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.png" />
     <title>Remote</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>Remote Header</header>
-    <main>Remote Main</main>
+    <main>
+      <h2>Remote Main</h2>
+      <button onclick="incCount()">Inc Count</button>
+      <div id="count"></div>
+    </main>
+
+    <script>
+      function incCount() {
+        globalThis.parent.postMessage('incCount[remote]', '*');
+      }
+      const count = document.querySelector('#count');
+
+      globalThis.addEventListener('message', ({ data }) => {
+        count.textContent = data;
+      });
+    </script>
   </body>
 </html>

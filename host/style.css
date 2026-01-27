@@ -1,9 +1,10 @@
 body {
   overflow: hidden;
-  margin: 0;
-  height: 100vh;
+  height: calc(100vh - 1em);
   display: grid;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 2em auto;
+  gap: 1em;
   grid-template-areas:
     'header header'
     'left right';
@@ -15,7 +16,9 @@ header {
 
 .left {
   grid-area: left;
+  position: relative;
 }
 .right {
   grid-area: right;
+  position: relative;
 }

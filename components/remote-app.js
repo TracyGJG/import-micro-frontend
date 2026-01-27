@@ -5,13 +5,18 @@ const WebComponentSytlesheet = () => {
   return StyleSheet;
 };
 
-const WebComponentTemplate = (attrProp) => {
+const WebComponentTemplate = (srcUrl) => {
   const template = document.createElement('template');
-  template.innerHTML = /*html*/ `
-    <iframe src="${attrProp}" frameborder="0"></iframe>
-  `;
+  template.innerHTML = `<iframe src="${srcUrl}" frameborder="0"></iframe>`;
   return template.content.cloneNode(true);
 };
+
+globalThis.addEventListener('message', ({ data }) => {
+  const evt = new CustomEvent('messageToHost', {
+    detail: data,
+  });
+  globalThis.dispatchEvent(evt);
+});
 
 class WebComponent extends HTMLElement {
   static ObservedAttributes = ['url'];
@@ -21,53 +26,33 @@ class WebComponent extends HTMLElement {
 
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.adoptedStyleSheets = [WebComponentSytlesheet()];
+    this.iframe = null;
+
+    this.addEventListener('messageFromHost', (evt) => {
+      this.iframe.contentWindow.postMessage(evt.detail, '*');
+    });
   }
 
-  get attrProp() {
+  get srcUrl() {
     return this.getAttribute('url');
   }
 
-  set attrProp(value) {
+  set srcUrl(value) {
     this.setAttribute('url', value);
   }
-
-  // get eventProp() {
-  //   return this.#internalClickEvent;
-  // }
-
-  // set eventProp(fn) {
-  //   this.#internalClickEvent = fn;
-  // }
 
   static get observedAttributes() {
     return this.ObservedAttributes;
   }
 
-  // handleEvent(evt) {
-  //   const attrValues = ["Tick", "Tack", "Toe"];
-  //   if ("Toggle" === evt.target.textContent) {
-  //     this.attrProp =
-  //       attrValues[
-  //         (1 +
-  //           attrValues.findIndex((attrValue) => attrValue === this.attrProp)) %
-  //           attrValues.length
-  //       ];
-  //   }
-  // }
-
-  // attributeChangedCallback(name, oldVal, newVal) {
-  //   if (WebComponent.ObservedAttributes.includes(name)) {
-  //     if (name === "prop") {
-  //       this.#attr.textContent = newVal;
-  //     }
-  //   }
-  // }
-
   connectedCallback() {
-    this.shadowRoot.appendChild(WebComponentTemplate(this.attrProp));
+    this.shadowRoot.appendChild(WebComponentTemplate(this.srcUrl));
+    this.iframe = this.shadowRoot.querySelector('iframe');
   }
 
-  disconnectedCallback() {}
+  disconnectedCallback() {
+    this.iframe = null;
+  }
 }
 
 customElements.define('remote-app', WebComponent);
