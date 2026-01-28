@@ -1,11 +1,20 @@
 {
-  "component": {
-    "type": "MFE-COMP",
+  "component1": {
+    "type": "mfe-comp",
     "url": "http://localhost:3003/mfe-comp.js",
-    "attribs": {}
+    "attribs": {
+      "title": "One"
+    }
+  },
+  "component2": {
+    "type": "mfe-comp",
+    "url": "http://localhost:3003/mfe-comp.js",
+    "attribs": {
+      "title": "Two"
+    }
   },
   "remote-app": {
-    "type": "REMOTE-APP",
+    "type": "remote-app",
     "url": "http://localhost:3003/remote-app.js",
     "attribs": {
       "url": "http://localhost:3002/"

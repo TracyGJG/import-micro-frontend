@@ -3,19 +3,24 @@ body {
   height: calc(100vh - 1em);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 4em auto;
+  grid-template-rows: 4em 1fr 1fr;
   gap: 1em;
   grid-template-areas:
     'header header'
-    'left right';
+    'left1 right'
+    'left2 right';
 }
 
 header {
   grid-area: header;
 }
 
-.left {
-  grid-area: left;
+.left1 {
+  grid-area: left1;
+  position: relative;
+}
+.left2 {
+  grid-area: left2;
   position: relative;
 }
 .right {

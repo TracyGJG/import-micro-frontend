@@ -5,11 +5,11 @@ const WebComponentStylesheet = () => {
   return StyleSheet;
 };
 
-const WebComponentTemplate = () => {
+const WebComponentTemplate = (title) => {
   const template = document.createElement('template');
   template.innerHTML = /*html*/ `
     <section>
-      <h2>MFE Component</h2>
+      <h2>MFE Component: ${title}</h2>
       <button action="incCount">Inc Count</button>
       <div id="count"></div>
     </section>
@@ -27,6 +27,8 @@ const WebComponentTemplate = () => {
 };
 
 class WebComponent extends HTMLElement {
+  static ObservedAttributes = ['title'];
+
   constructor() {
     super();
     this.count = null;
@@ -41,8 +43,16 @@ class WebComponent extends HTMLElement {
     });
   }
 
+  get title() {
+    return this.getAttribute('title');
+  }
+
+  set title(title) {
+    this.setAttribute('title', value);
+  }
+
   connectedCallback() {
-    this.shadowRoot.appendChild(WebComponentTemplate());
+    this.shadowRoot.appendChild(WebComponentTemplate(this.title));
     this.count = this.shadowRoot.querySelector('#count');
   }
 
