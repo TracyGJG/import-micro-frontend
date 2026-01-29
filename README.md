@@ -1,6 +1,6 @@
 # Import Micro-Frontend (MFE) Sampler
 
-This project employs a combination of Web Components and dynamic ESM imports to implement a MFE architecture.
+This project employs a combination of Web Components and dynamic ESM imports to implement a MFE architecture. This is a form of Client-side Include (CSI.)
 
 ## Background
 
@@ -14,9 +14,18 @@ Employing a micro-frontend architecure is an increasingly popular way to manage 
 There are no standard technologies to support this architecture but there are a range of tools and techniques, as follows:
 
 - **Module Federation** is probably the most popular as it works in conjunction with JavaScript frameworks like React and Angular through tools like Webpack.
+  - An alternative: [Nx](https://nx.dev/docs/technologies/module-federation/concepts/micro-frontend-architecture).
 - **Meta Frameworks** such as [Single-SPA](https://single-spa.js.org/) introduce additional tools that are agnostic of JS framework but still require configuration.
-- **Standards-based** techniques include tools such as [Zoid](https://krakenjs.com/zoid/) and [Web Fragments](https://web-fragments.dev/) augment standardised technologies such as those list in the next group.
-- **Web Standards** include [HTML iframes](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe), [the web components API](https://www.webcomponents.org/introduction), and [ECMAScript Model (ESM) dynamic imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import).
+  - An alternative: [OpenComponents](https://opencomponents.github.io/).
+- **Standards-based** techniques include tools such as:
+  - [Zoid](https://krakenjs.com/zoid/) by KrakenJs
+  - [Web Fragments](https://web-fragments.dev/) augments standardised technologies such as those list in the next group
+  - [OpenMfe](https://openmfe.org/).
+- **Web Standards** including:
+  - [HTML iframes](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe),
+  - [the web components API](https://www.webcomponents.org/introduction), and
+  - [ECMAScript Model (ESM) dynamic imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)
+  - Server-/Edge-side includes ([SSI](https://httpd.apache.org/docs/current/howto/ssi.html)/[ESI](https://www.keycdn.com/support/edge-side-includes)).
 
 Pretty much all MFE techniques require a manifest of some sort to map components to be presented with the URL where they can be obtained. The manifest is usually loaded client-side at runtime and used to load and inject the MFEs into the host page.
 
