@@ -19,8 +19,9 @@ There are no standard technologies to support this architecture but there are a 
   - An alternative: [OpenComponents](https://opencomponents.github.io/).
 - **Standards-based** techniques include tools such as:
   - [Zoid](https://krakenjs.com/zoid/) by KrakenJs
-  - [Web Fragments](https://web-fragments.dev/) augments standardised technologies such as those list in the next group
-  - [OpenMfe](https://openmfe.org/).
+  - [Web Fragments](https://web-fragments.dev/) by Cloudflare augments standardised technologies such as those list in the next group
+  - [OpenMfe](https://openmfe.org/)
+  - [Remote Components](https://vercel.com/academy/microfrontends-on-vercel/remote-components-intro) by Vercel.
 - **Web Standards** including:
   - [HTML iframes](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe),
   - [the web components API](https://www.webcomponents.org/introduction), and
