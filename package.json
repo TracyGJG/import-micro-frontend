@@ -2,7 +2,6 @@
   "name": "mfe-experiment",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "start": "json-server -p 3001 -s ./host  db.json",
     "remote": "json-server -p 3002 -s ./remote  db.json",
@@ -13,6 +12,6 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "json-server": "^0.17.4"
+    "json-server": "1.0.0-beta.12"
   }
 }
