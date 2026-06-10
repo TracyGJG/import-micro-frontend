@@ -12,6 +12,7 @@ body {
 }
 
 header {
+  padding-inline: 1em;
   grid-area: header;
 }
 
