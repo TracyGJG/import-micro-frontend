@@ -1,6 +1,12 @@
 const WebComponentStylesheet = () => {
   const StyleSheet = new CSSStyleSheet();
   StyleSheet.replaceSync(/*css*/ `
+    div {
+      margin: 1em;
+      display: grid;
+      grid-template-columns: 2fr 2fr 1fr;
+      gap: 1em;
+    }
   `);
   return StyleSheet;
 };

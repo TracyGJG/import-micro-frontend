@@ -1,6 +1,10 @@
 const WebComponentStylesheet = () => {
   const StyleSheet = new CSSStyleSheet();
   StyleSheet.replaceSync(/*css*/ `
+  :host {
+  display: inline-block;
+}
+
     .error {
       border: 2px solid #f00;
       background-color: #f003;
