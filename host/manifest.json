@@ -3,21 +3,28 @@
     "type": "mfe-comp",
     "url": "http://localhost:3003/mfe-comp.js",
     "attribs": {
-      "title": "One"
-    }
+      "title": "One",
+      "btn1": "Alpha",
+      "btn2": "Beta"
+    },
+    "topics": ["Alpha", "Beta"]
   },
   "component2": {
     "type": "mfe-comp",
     "url": "http://localhost:3003/mfe-comp.js",
     "attribs": {
-      "title": "Two"
-    }
+      "title": "Two",
+      "btn1": "Gamma",
+      "btn2": "Beta"
+    },
+    "topics": ["Gamma", "Beta"]
   },
   "remote-app": {
     "type": "remote-app",
     "url": "http://localhost:3003/remote-app.js",
     "attribs": {
       "url": "http://localhost:3002/"
-    }
+    },
+    "topics": ["Alpha", "Gamma"]
   }
 }

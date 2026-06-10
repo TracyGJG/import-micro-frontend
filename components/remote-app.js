@@ -10,6 +10,8 @@ const WebComponentStylesheet = () => {
     }
     iframe {
       border: none 0;
+      width: 300px;
+      height: 200px;
     }
   `);
   return StyleSheet;
@@ -28,8 +30,9 @@ const WebComponentErrorTemplate = (error) => {
 };
 
 globalThis.addEventListener('message', ({ data }) => {
+  const [topic, payload] = data.split(/:/);
   const evt = new CustomEvent('messageToHost', {
-    detail: data,
+    detail: { topic, payload },
   });
   globalThis.dispatchEvent(evt);
 });

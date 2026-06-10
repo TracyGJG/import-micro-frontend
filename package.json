@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "json-server -p 3001 -s ./host  db.json",
-    "remote": "json-server -p 3002 -s ./remote  db.json",
-    "comp": "json-server -p 3003 -s ./components  db.json"
+    "start": "json-server -no-cors -p 3001 -s ./host  db.json",
+    "remote": "json-server -no-cors -p 3002 -s ./remote  db.json",
+    "comp": "json-server -no-cors -p 3003 -s ./components  db.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "json-server": "1.0.0-beta.12"
+    "json-server": "0.17.4"
   }
 }

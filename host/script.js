@@ -1,12 +1,14 @@
 import manifest from './manifest.json' with { type: 'json' };
 
-let GlobalCount = 0;
+let GlobalCounts = { alpha: 0, beta: 0, gamma: 0 };
 
 for (let mfe in manifest) {
   ((target, manifest) => {
     const { type, url, attribs } = manifest[target];
     const domTarget = document.querySelector(`[data-mfe-target="${target}"]`);
+
     if (!domTarget) throw Error('MFE DOM target not found.');
+
     let mfeComp = import(url)
       .then(() => {
         mfeComp = document.createElement(type);
@@ -29,13 +31,31 @@ for (let mfe in manifest) {
   })(mfe, manifest);
 }
 
-window.addEventListener('messageToHost', (evt) => {
-  GlobalCount++;
+window.addEventListener('messageToHost', ({ detail: { topic, payload } }) => {
+  if (topic === 'Reset') {
+    GlobalCounts = { alpha: 0, beta: 0, gamma: 0 };
 
-  for (let mfe in manifest) {
-    const evt = new CustomEvent('messageFromHost', {
-      detail: GlobalCount,
-    });
-    manifest[mfe].mfe.dispatchEvent(evt);
+    for (let mfe in manifest) {
+      manifest[mfe].topics.forEach((_topic) => {
+        const evt = new CustomEvent('messageFromHost', {
+          detail: {
+            topic: _topic,
+            payload: GlobalCounts[_topic.toLowerCase()],
+          },
+        });
+        manifest[mfe].mfe.dispatchEvent(evt);
+      });
+    }
+  } else {
+    GlobalCounts[topic.toLowerCase()]++;
+
+    for (let mfe in manifest) {
+      if (manifest[mfe].topics.includes(topic)) {
+        const evt = new CustomEvent('messageFromHost', {
+          detail: { topic, payload: GlobalCounts[topic.toLowerCase()] },
+        });
+        manifest[mfe].mfe.dispatchEvent(evt);
+      }
+    }
   }
 });

@@ -10,18 +10,30 @@
   <body>
     <main>
       <h2>Remote Main</h2>
-      <button onclick="incCount()">Inc Count</button>
-      <div id="count"></div>
+      <div>
+        <button onclick="incCount('Alpha')">Inc Alpha</button>
+        Alpha: <span id="countA"></span>
+      </div>
+      <div>
+        <button onclick="incCount('Gamma')">Inc Gamma</button>
+        Gamma: <span id="countG"></span>
+      </div>
+      <div>
+        <button onclick="incCount('Reset')">Reset All</button>
+      </div>
     </main>
 
     <script>
-      function incCount() {
-        globalThis.parent.postMessage('incCount[remote]', '*');
+      function incCount(topic) {
+        globalThis.parent.postMessage(`${topic}:incCount[remote]`, '*');
       }
-      const count = document.querySelector('#count');
+      const counts = {
+        Alpha: document.querySelector('#countA'),
+        Gamma: document.querySelector('#countG'),
+      };
 
-      globalThis.addEventListener('message', ({ data }) => {
-        count.textContent = data;
+      globalThis.addEventListener('message', ({ data: { topic, payload } }) => {
+        counts[topic].textContent = payload;
       });
     </script>
   </body>
