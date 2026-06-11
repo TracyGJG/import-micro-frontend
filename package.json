@@ -2,16 +2,13 @@
   "name": "mfe-experiment",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
-    "start": "json-server -p 3001 -s ./host  db.json",
-    "remote": "json-server -p 3002 -s ./remote  db.json",
-    "comp": "json-server -p 3003 -s ./components  db.json"
+    "start": "node server.js -p 3001 -f host",
+    "remote": "node server.js -p 3002 -f remote",
+    "comps": "node server.js -p 3003 -f components"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "devDependencies": {
-    "json-server": "0.17.4"
-  }
+  "author": "TGJ Gilmore <tracyg.gilmore+npm@gmail.com>",
+  "license": "CC0-1.0"
 }
