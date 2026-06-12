@@ -15,7 +15,7 @@ const WebComponentStylesheet = () => {
     iframe {
       border: none 0;
       width: 300px;
-      height: 200px;
+      height: 400px;
     }
   `);
   return StyleSheet;

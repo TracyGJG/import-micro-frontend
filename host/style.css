@@ -1,6 +1,5 @@
 body {
   overflow: hidden;
-  height: calc(100vh - 1em);
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 4em 1fr 1fr;

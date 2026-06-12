@@ -21,6 +21,15 @@
       <div>
         <button onclick="incCount('Reset')">Reset All</button>
       </div>
+      <br />
+      <hr />
+      <section>
+        <remote-comp
+          title="Remote Component"
+          btn1="Alpha"
+          btn2="Delta"
+        ></remote-comp>
+      </section>
     </main>
 
     <script>
@@ -34,6 +43,34 @@
 
       globalThis.addEventListener('message', ({ data: { topic, payload } }) => {
         counts[topic].textContent = payload;
+
+        const evt = new CustomEvent('topicChangeIn', {
+          detail: { topic, payload },
+        });
+        document.querySelector('remote-comp').dispatchEvent(evt);
+      });
+    </script>
+    <script type="module">
+      import './remote-comp.js';
+      let delta = 0;
+
+      globalThis.addEventListener('topicChangeOut', ({ detail }) => {
+        if (detail === 'Delta') {
+          delta++;
+          const evt = new CustomEvent('topicChangeIn', {
+            detail: { topic: detail, payload: delta },
+          });
+          document.querySelector('remote-comp').dispatchEvent(evt);
+        } else {
+          if (detail === 'Reset') {
+            delta = 0;
+            const evt = new CustomEvent('topicChangeIn', {
+              detail: { topic: detail, payload: delta },
+            });
+            document.querySelector('remote-comp').dispatchEvent(evt);
+          }
+          incCount(detail);
+        }
       });
     </script>
   </body>
