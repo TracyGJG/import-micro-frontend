@@ -33,16 +33,27 @@
     </main>
 
     <script>
+      let delta = 0;
+
       function incCount(topic) {
         globalThis.parent.postMessage(`${topic}:incCount[remote]`, '*');
       }
       const counts = {
         Alpha: document.querySelector('#countA'),
         Gamma: document.querySelector('#countG'),
+        Delta: null,
       };
 
       globalThis.addEventListener('message', ({ data: { topic, payload } }) => {
-        counts[topic].textContent = payload;
+        if (counts.hasOwnProperty(topic)) {
+          if (counts[topic]) {
+            counts[topic].textContent = payload;
+          } else {
+            topic = 'Reset';
+            delta = 0;
+            payload = 0;
+          }
+        }
 
         const evt = new CustomEvent('topicChangeIn', {
           detail: { topic, payload },
@@ -52,7 +63,6 @@
     </script>
     <script type="module">
       import './remote-comp.js';
-      let delta = 0;
 
       globalThis.addEventListener('topicChangeOut', ({ detail }) => {
         if (detail === 'Delta') {

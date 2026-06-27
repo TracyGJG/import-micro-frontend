@@ -18,11 +18,11 @@ const WebComponentTemplate = (title, btn1, btn2) => {
       <h2>${title}</h2>
       <div>
         <button data-action="${btn1}">Inc ${btn1}</button>
-        ${btn1}: <span data-count="${btn1}"></span>
+        ${btn1}: <span data-count="${btn1}">0</span>
       </div>
       <div>
         <button data-action="${btn2}">Inc ${btn2}</button>
-        ${btn2}: <span data-count="${btn2}"></span>
+        ${btn2}: <span data-count="${btn2}">0</span>
       </div>
       <div>
         <button data-action="Reset">Reset all</button>

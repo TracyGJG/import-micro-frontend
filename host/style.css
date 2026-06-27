@@ -1,7 +1,7 @@
 body {
   overflow: hidden;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 320px 320px;
   grid-template-rows: 4em 1fr 1fr;
   gap: 1em;
   grid-template-areas:
